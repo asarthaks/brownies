@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  brownies:
+    image: postgres:latest
+    container_name: brownies
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: brownies-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+
+volumes:
+  postgres_data:
