@@ -53,25 +53,15 @@ def search(request):
         context["search"] = request.GET.get('search_button')
         context["query"] = request.GET.get('query_input')
         results = get_dish_from_ingredient(context["query"])
-        
         context["items"] = results
-        print(results)
-        a = get_complete_recipe(1)
-        print(a)
 
     return render(request, 'RecipeSearchTemplate.html', context)
 
 def recipe(request):
     context = dict()
-    if request.GET.get('query_input'):
-        context["search"] = request.GET.get('search_button')
-        context["query"] = request.GET.get('query_input')
-        results = get_dish_from_ingredient(context["query"])
-        
-        context["items"] = results
-        print(results)
-        a = get_complete_recipe(1)
-        print(a)
+    dish_id = request.GET.get('dish_id')
+    complete_recipe = get_complete_recipe(dish_id)
+    context = complete_recipe[0]["recipes"][0]
 
     return render(request, 'RecipeSearchTemplate.html', context)
 

@@ -15,21 +15,56 @@
         }
         .card {
             background-color: #ffb141;
+            margin-bottom: 20px; /* Add spacing between cards */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .card .card-content .card-title {
             color: #2f4881;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
         .card .card-content p {
             color: #2f4881;
+            margin-bottom: 8px;
         }
         .card .card-action a {
             color: white;
             background-color: #2f4881;
-            padding: 5px 10px;
+            padding: 8px 12px;
             border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .card .card-action a:hover {
+            background-color: #1a237e; /* Darken color on hover */
         }
         .btn {
             background-color: #2f4881;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .recipe-details {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .recipe-details h2 {
+            color: #2f4881;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .recipe-details h3 {
+            color: #2f4881;
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+        .recipe-details p {
+            color: #2f4881;
+            margin-bottom: 8px;
         }
     </style>
 </head>
@@ -47,7 +82,7 @@
         <div class="section">
             <h1 class="center-align">{{ title }}</h1>
             <div class="row">
-                <form class="col s12" action="#" method="get">
+                <form class="col s12" action="/search/" method="get">
                     <div class="row">
                         <div class="input-field col s12">
                             <input id="query_input" type="text" name="query_input" class="validate">
@@ -69,6 +104,8 @@
         <div class="section">
             {% if search %}
                 <h2 class="center-align">You have searched for {{ query }}!</h2>
+            {% elif recipe %}
+
             {% else %}
                 <p class="center-align">Enter the ingredient for which you want to find a possible recipe.</p>
             {% endif %}
@@ -86,13 +123,29 @@
                                 <p><strong>Amount:</strong> {{ item.ingredient_amount }} {{ item.ingredient_unit }}</p>
                             </div>
                             <div class="card-action">
-                                <a href="{{ item.dish_id }}">View Recipe</a>
+                                <a href="/recipe/?dish_id={{ item.dish_id }}">View Recipe</a>
                             </div>
                         </div>
                     </div>
                 {% endfor %}
             </div>
         </div>
+
+        <!-- Recipe details section -->
+        {% if recipe %}
+        <div class="recipe-details">
+            <h2>{{ dish_name }}</h2>
+            <h3>Ingredients:</h3>
+            <ul>
+                {% for ingredient in ingredients %}
+                    <li><strong>{{ ingredient.ingredient_name }}:</strong> {{ ingredient.ingredient_amount }} {{ ingredient.ingredient_unit }}</li>
+                {% endfor %}
+            </ul>
+            <h3>Recipe:</h3>
+            <p>{{ recipe }}</p>
+        </div>
+        {% endif %}
+
     </div>
 
     <!-- Import Materialize JavaScript -->
