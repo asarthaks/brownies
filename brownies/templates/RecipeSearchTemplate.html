@@ -2,26 +2,100 @@
 <html>
 <head>
     <title>{{ title }}</title>
+    <!-- Import Materialize CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <!-- Import Google Icon Font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Viewport for responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        /* Custom colors */
+        .nav-wrapper {
+            background-color: #ee6e73;
+        }
+        .card {
+            background-color: #ffb141;
+        }
+        .card .card-content .card-title {
+            color: #2f4881;
+        }
+        .card .card-content p {
+            color: #2f4881;
+        }
+        .card .card-action a {
+            color: white;
+            background-color: #2f4881;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        .btn {
+            background-color: #2f4881;
+        }
+    </style>
 </head>
 <body>
-    <h1>{{ title }}</h1>
 
-    <form action="#" method="get">
-        <input type="text" value="" name="query_input" size="1"/>
-        <input type="submit" class="btn" value="Click" name="search_button">
-    </form>
+    <!-- Navigation bar -->
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center">{{ title }}</a>
+        </div>
+    </nav>
 
-    {% if search %}
-        <h1>You have searched for {{ query }}!</h1>
-    {% else %}
-        <p>Enter the ingredient for which you want find a possible recipe for.</p>
-    {% endif %}
- 
-    <ul>
-        {% for item in items %}
-        <a href="{{ item.dish_id }}">Dish Name: {{ item.dish_name }} Ingredient Name: {{ item.ingredient_name }} Ingredient Amount: {{ item.ingredient_amount }} Ingredient Unit: {{ item.ingredient_unit }}</a>
-            <!-- <li></li> -->
-        {% endfor %}
-    </ul>
+    <!-- Main content -->
+    <div class="container">
+        <div class="section">
+            <h1 class="center-align">{{ title }}</h1>
+            <div class="row">
+                <form class="col s12" action="#" method="get">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="query_input" type="text" name="query_input" class="validate">
+                            <label for="query_input">Enter Ingredient</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button class="btn waves-effect waves-light" type="submit" name="search_button" value="True">Search
+                                <i class="material-icons right">search</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Search result section -->
+        <div class="section">
+            {% if search %}
+                <h2 class="center-align">You have searched for {{ query }}!</h2>
+            {% else %}
+                <p class="center-align">Enter the ingredient for which you want to find a possible recipe.</p>
+            {% endif %}
+        </div>
+
+        <!-- List of items -->
+        <div class="section">
+            <div class="row">
+                {% for item in items %}
+                    <div class="col s12 m6 l4">
+                        <div class="card">
+                            <div class="card-content">
+                                <span class="card-title">{{ item.dish_name }}</span>
+                                <p><strong>Ingredient Name:</strong> {{ item.ingredient_name }}</p>
+                                <p><strong>Amount:</strong> {{ item.ingredient_amount }} {{ item.ingredient_unit }}</p>
+                            </div>
+                            <div class="card-action">
+                                <a href="{{ item.dish_id }}">View Recipe</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Import Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>

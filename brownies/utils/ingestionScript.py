@@ -97,7 +97,6 @@ class DishIngredient:
         return self.cursor.fetchall()
 
 from scraperScript import *
-import uuid
 
 #Imported
 
@@ -132,10 +131,10 @@ for dish in dish_list:
         ingredient_unit = ingredient.get("ingredient_unit", "")
         ingredient_obj = DishIngredient(cur, ingredient_name, ingredient_amount, ingredient_unit, dish_obj.id)
         print(ingredient_obj.__dict__)
-        ingredient_obj.save_to_db()
+        # ingredient_obj.save_to_db()
 
 # Commit the transaction
-conn.commit()
+# conn.commit()
 
 # Close the cursor and connection
 cur.close()
