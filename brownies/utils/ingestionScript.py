@@ -139,7 +139,7 @@ for dish in dish_list:
         print("\t", ingredient_obj.__dict__)
         # ingredient_obj.save_to_db()
     print("Done")
-    time.sleep(0.5)
+    # time.sleep(0.5)
 
 # Commit the transaction
 # conn.commit()
