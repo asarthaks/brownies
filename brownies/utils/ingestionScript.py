@@ -1,3 +1,4 @@
+import time
 import psycopg2
 
 
@@ -122,16 +123,23 @@ cur = conn.cursor()
 
 unique_dishes = set(dish_list)
 for dish in dish_list:
+    print("Scraping the Dish: {}".format(dish))
     dish_data = scrape_and_return_dish(dish)
     dish_obj = Dish(cur, dish, dish_data["recipe"])
     dish_obj.save_to_db()
+    print("Ingesting the recipe and ingredients for {} into the Database!".format(dish))
     for ingredient in dish_data["ingredients"]:
         ingredient_name = ingredient["ingredient_name"]
         ingredient_amount = ingredient.get("ingredient_amount", "")
         ingredient_unit = ingredient.get("ingredient_unit", "")
         ingredient_obj = DishIngredient(cur, ingredient_name, ingredient_amount, ingredient_unit, dish_obj.id)
-        print(ingredient_obj.__dict__)
+        ingredient_obj.__dict__.pop("cursor")
+        ingredient_obj.__dict__.pop("id")
+        ingredient_obj.__dict__.pop("dish_id")
+        print("\t", ingredient_obj.__dict__)
         # ingredient_obj.save_to_db()
+    print("Done")
+    time.sleep(0.5)
 
 # Commit the transaction
 # conn.commit()
