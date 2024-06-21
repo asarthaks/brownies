@@ -1,0 +1,17 @@
+services:
+  app:
+    build: .
+    container_name: text_technology
+    command: python /project/brownies/manage.py runserver 0.0.0.0:8787
+    ports:
+      - 8787:8787
+      - 5432:5432
+    volumes:
+      - .:/code
+    depends_on:
+      - brownies-server-postgres
+
+  brownies-server-postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: brownies_db
