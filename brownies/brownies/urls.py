@@ -23,6 +23,6 @@ from recipies.RecipeSearchInterface import search, recipe
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", index),
-    path('search/', search),
-    path('recipe/', recipe),
+    path('search/', search), # endpoint for search page
+    path('recipe/', recipe), # endpoint for recipe page
 ]
