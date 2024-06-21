@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+ 
+    {% if user_authenticated %}
+        <h1>Welcome, {{ username }}!</h1>
+    {% else %}
+        <p>Please log in to access the content.</p>
+    {% endif %}
+ 
+    <ul>
+        {% for item in items %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

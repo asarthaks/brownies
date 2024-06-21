@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+
+    <form action="#" method="get">
+        <input type="text" value="" name="query_input" size="1"/>
+        <input type="submit" class="btn" value="Click" name="search_button">
+    </form>
+
+    {% if search %}
+        <h1>You have searched for {{ query }}!</h1>
+    {% else %}
+        <p>Enter the ingredient for which you want find a possible recipe for.</p>
+    {% endif %}
+ 
+    <ul>
+        {% for item in items %}
+        <a href="{{ item.dish_id }}">Dish Name: {{ item.dish_name }} Ingredient Name: {{ item.ingredient_name }} Ingredient Amount: {{ item.ingredient_amount }} Ingredient Unit: {{ item.ingredient_unit }}</a>
+            <!-- <li></li> -->
+        {% endfor %}
+    </ul>
+</body>
+</html>

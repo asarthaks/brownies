@@ -2,7 +2,11 @@ services:
   app:
     build: .
     container_name: text_technology
+<<<<<<< HEAD
     command: python /project/brownies/manage.py runserver 0.0.0.0:8787
+=======
+    command: python /code/brownies/manage.py runserver 0.0.0.0:8787
+>>>>>>> b0dd2b2 (access part)
     ports:
       - 8787:8787
       - 5432:5432

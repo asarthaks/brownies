@@ -17,6 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+<<<<<<< HEAD
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+=======
+from recipies.views import index
+from recipies.RecipeSearchInterface import search, recipe
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path("", index),
+    path('search/', search),
+    path('recipe/', recipe),
+]
+>>>>>>> b0dd2b2 (access part)
